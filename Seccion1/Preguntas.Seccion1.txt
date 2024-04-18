@@ -1,0 +1,43 @@
+                             PREGUNTAS DE LA Semana 01
+
+¿Cómo logró un partido político, que contaba con un solo diputado en 2014, obtener 
+el mayor porcentaje de votos en las elecciones de 2018?
+- perdienron 26 municipios, PLN 9 PAC Y 2 FRENTE AMPLIO
+	
+ ¿Cuántos cantones ganó cada partido político y cómo se compara este resultado con 
+ las elecciones de 2014?
+pac  pln  prn pusc 
+  30   11   37    3 
+
+¿Cómo cambió la distribución de los cantones ganados por cada partido político en 
+ comparación con las elecciones de 2014?
+cambio sin\ncambio 
+         42          34 
+
+ ¿En qué cantones logró el PRN superar a los demás 
+  partidos políticos?
+pac al pln   prn al fa  prn al pac  prn al pln pusc al pac  sin cambio 
+          6           2           5          26           3          34 
+
+¿Cómo varió el porcentaje de votos obtenidos por el PLN, PUSC, PAC, PRN y PIN?
+
+grafico_votos("pln", "blue")
+grafico_votos("pusc", "red")
+grafico_votos("pac", "black")
+grafico_votos("prn", "orange")
+grafico_votos("pin", "white")
+
+ ¿Qué partido político resultó ganador en los seis cantones con la mayor cantidad 
+  de electores?
+ El partido fUE Fabricio Alvarado
+ ¿Qué partidos políticos resultaron ganadores en cada uno de los cantones?
+                       Mediante codigo
+cantones= resultados2018%>%
+  filter(codigo==101 | codigo==103 |codigo==119|codigo==201|codigo==210|codigo==301)
+sum(cantones$votos_validos)/sum(resultados2018$votos_validos)*100
+
+resultados2018_porcen%>%
+  filter(codigo==101 | codigo==103 |codigo==119|codigo==201|codigo==210|codigo==301)%>%
+  gather(partido, votos, -codigo)%>%
+  group_by(codigo)%>%
+  filter(votos==max(votos))
